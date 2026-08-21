@@ -141,6 +141,11 @@
   "orderCancelConfirmBody": "Cette action est irréversible.",
   "orderReorder": "Recommander",
   "orderDetailsTitle": "Détails de la commande",
+  "orderEtaMinutes": "Livraison estimée dans {minutes} min",
+  "@orderEtaMinutes": {
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "orderEtaImminent": "Livraison imminente",
   "orderNumber": "Commande #{id}",
   "@orderNumber": {
     "placeholders": { "id": { "type": "String" } }

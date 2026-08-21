@@ -141,6 +141,11 @@
   "orderCancelConfirmBody": "This action cannot be undone.",
   "orderReorder": "Reorder",
   "orderDetailsTitle": "Order details",
+  "orderEtaMinutes": "Estimated delivery in {minutes} min",
+  "@orderEtaMinutes": {
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "orderEtaImminent": "Arriving any moment",
   "orderNumber": "Order #{id}",
   "@orderNumber": {
     "placeholders": { "id": { "type": "String" } }

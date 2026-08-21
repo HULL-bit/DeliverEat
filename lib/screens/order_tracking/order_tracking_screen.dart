@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -147,6 +149,12 @@ class _Content extends StatelessWidget {
             ),
           ],
         ),
+        if (order.estimatedDeliveryAt != null &&
+            order.status != OrderStatus.delivered &&
+            order.status != OrderStatus.cancelled) ...[
+          const SizedBox(height: 12),
+          _EtaCountdown(estimatedDeliveryAt: order.estimatedDeliveryAt!),
+        ],
         const SizedBox(height: 24),
         StatusTimeline(status: order.status, history: order.statusHistory),
         const SizedBox(height: 12),
@@ -184,6 +192,58 @@ class _Content extends StatelessWidget {
           ),
         ],
       ],
+    );
+  }
+}
+
+/// Compte à rebours jusqu'à l'heure de livraison estimée renvoyée par
+/// l'API (estimatedDeliveryAt), rafraîchi chaque minute.
+class _EtaCountdown extends StatefulWidget {
+  const _EtaCountdown({required this.estimatedDeliveryAt});
+
+  final DateTime estimatedDeliveryAt;
+
+  @override
+  State<_EtaCountdown> createState() => _EtaCountdownState();
+}
+
+class _EtaCountdownState extends State<_EtaCountdown> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 30), (_) {
+      if (mounted) setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final scheme = Theme.of(context).colorScheme;
+    final remaining = widget.estimatedDeliveryAt.difference(DateTime.now());
+    final minutes = remaining.inMinutes;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(color: scheme.tertiaryContainer, borderRadius: BorderRadius.circular(14)),
+      child: Row(
+        children: [
+          Icon(Icons.timer_outlined, color: scheme.onTertiaryContainer),
+          const SizedBox(width: 10),
+          Text(
+            minutes > 0 ? l10n.orderEtaMinutes(minutes) : l10n.orderEtaImminent,
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(color: scheme.onTertiaryContainer),
+          ),
+        ],
+      ),
     );
   }
 }

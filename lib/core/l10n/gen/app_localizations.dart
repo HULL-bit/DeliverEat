@@ -830,6 +830,18 @@ abstract class AppLocalizations {
   /// **'Détails de la commande'**
   String get orderDetailsTitle;
 
+  /// No description provided for @orderEtaMinutes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Livraison estimée dans {minutes} min'**
+  String orderEtaMinutes(int minutes);
+
+  /// No description provided for @orderEtaImminent.
+  ///
+  /// In fr, this message translates to:
+  /// **'Livraison imminente'**
+  String get orderEtaImminent;
+
   /// No description provided for @orderNumber.
   ///
   /// In fr, this message translates to:

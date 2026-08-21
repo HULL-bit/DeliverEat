@@ -398,6 +398,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get orderDetailsTitle => 'Détails de la commande';
 
   @override
+  String orderEtaMinutes(int minutes) {
+    return 'Livraison estimée dans $minutes min';
+  }
+
+  @override
+  String get orderEtaImminent => 'Livraison imminente';
+
+  @override
   String orderNumber(String id) {
     return 'Commande #$id';
   }
