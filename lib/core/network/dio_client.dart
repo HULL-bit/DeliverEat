@@ -4,6 +4,7 @@ import '../config/app_config.dart';
 import '../constants/app_constants.dart';
 import '../storage/secure_storage.dart';
 import 'auth_interceptor.dart';
+import 'retry_interceptor.dart';
 
 /// Enveloppe le client HTTP unique de l'application.
 ///
@@ -35,7 +36,11 @@ class DioClient {
         receiveTimeout: AppDurations.receiveTimeout,
         contentType: 'application/json',
       ),
-    )..interceptors.add(authInterceptor);
+    );
+    // Ordre important : l'intercepteur d'auth traite d'abord le refresh sur
+    // 401 TOKEN_EXPIRED ; ce qui n'est pas résolu retombe ensuite sur le
+    // petit backoff/retry (429 RATE_LIMITED, erreurs réseau transitoires).
+    dio.interceptors.addAll([authInterceptor, RetryInterceptor(dio)]);
 
     authInterceptor.attachRetryClient(dio);
 

@@ -64,7 +64,7 @@ class RestaurantProvider extends ChangeNotifier {
       final categories = await _service.getCategories();
       _categoriesState = ViewState.success(categories);
     } on ApiException catch (e) {
-      _categoriesState = ViewState.error(e.message);
+      _categoriesState = ViewState.error(e.message, errorCode: e.code);
     }
     notifyListeners();
   }
@@ -130,7 +130,7 @@ class RestaurantProvider extends ChangeNotifier {
         _servedFromCache = true;
         _state = ViewState.success(_items);
       } else {
-        _state = ViewState.error(e.message);
+        _state = ViewState.error(e.message, errorCode: e.code);
       }
     }
     notifyListeners();

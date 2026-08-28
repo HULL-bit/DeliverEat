@@ -22,6 +22,9 @@
   "commonRemove": "Remove",
   "commonSearch": "Search",
   "commonUnknownError": "An unexpected error occurred.",
+  "commonBack": "Back",
+  "commonScrollToTop": "Scroll to top",
+  "commonTogglePassword": "Show or hide password",
 
   "errorEmailTaken": "This email is already used by another account.",
   "errorInvalidCredentials": "Incorrect email or password.",
@@ -105,6 +108,7 @@
     "placeholders": { "restaurant": { "type": "String" } }
   },
   "restaurantSwitchConfirm": "Clear cart",
+  "restaurantToggleFavorite": "Add or remove from favorites",
 
   "cartTitle": "Cart",
   "cartEmptyTitle": "Your cart is empty",
@@ -115,6 +119,8 @@
   "cartViewCart": "View cart",
   "cartCheckoutButton": "Checkout",
   "cartQuantity": "Quantity",
+  "cartDecreaseQuantity": "Decrease quantity",
+  "cartIncreaseQuantity": "Increase quantity",
 
   "checkoutTitle": "Checkout",
   "checkoutAddressLabel": "Delivery address",

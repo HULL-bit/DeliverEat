@@ -69,6 +69,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get commonUnknownError => 'Une erreur inattendue est survenue.';
 
   @override
+  String get commonBack => 'Retour';
+
+  @override
+  String get commonScrollToTop => 'Remonter en haut';
+
+  @override
+  String get commonTogglePassword => 'Afficher ou masquer le mot de passe';
+
+  @override
   String get errorEmailTaken =>
       'Cet e-mail est déjà utilisé par un autre compte.';
 
@@ -296,6 +305,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get restaurantSwitchConfirm => 'Vider le panier';
 
   @override
+  String get restaurantToggleFavorite => 'Ajouter ou retirer des favoris';
+
+  @override
   String get cartTitle => 'Panier';
 
   @override
@@ -322,6 +334,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get cartQuantity => 'Quantité';
+
+  @override
+  String get cartDecreaseQuantity => 'Diminuer la quantité';
+
+  @override
+  String get cartIncreaseQuantity => 'Augmenter la quantité';
 
   @override
   String get checkoutTitle => 'Validation de commande';

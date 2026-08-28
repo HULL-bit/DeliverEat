@@ -47,7 +47,7 @@ class RestaurantDetailProvider extends ChangeNotifier {
       final restaurant = await _service.getRestaurantDetail(_restaurantId);
       _detailState = ViewState.success(restaurant);
     } on ApiException catch (e) {
-      _detailState = ViewState.error(e.message);
+      _detailState = ViewState.error(e.message, errorCode: e.code);
     }
     notifyListeners();
   }
@@ -64,7 +64,7 @@ class RestaurantDetailProvider extends ChangeNotifier {
       _hasNextReviews = result.meta.hasNextPage;
       _reviewsState = ViewState.success(_reviews);
     } on ApiException catch (e) {
-      _reviewsState = ViewState.error(e.message);
+      _reviewsState = ViewState.error(e.message, errorCode: e.code);
     }
     notifyListeners();
   }

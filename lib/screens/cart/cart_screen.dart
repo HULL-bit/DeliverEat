@@ -109,6 +109,7 @@ class _Stepper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
     return Container(
       decoration: BoxDecoration(color: scheme.primaryContainer, borderRadius: BorderRadius.circular(12)),
       child: Row(
@@ -116,11 +117,13 @@ class _Stepper extends StatelessWidget {
         children: [
           IconButton(
             icon: const Icon(Icons.remove_rounded, size: 18),
+            tooltip: l10n.cartDecreaseQuantity,
             onPressed: () => context.read<CartProvider>().decrementQuantity(menuItemId),
           ),
           Text('$quantity', style: Theme.of(context).textTheme.labelLarge),
           IconButton(
             icon: const Icon(Icons.add_rounded, size: 18),
+            tooltip: l10n.cartIncreaseQuantity,
             onPressed: () => context.read<CartProvider>().incrementQuantity(menuItemId),
           ),
         ],

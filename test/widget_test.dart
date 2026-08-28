@@ -3,12 +3,19 @@
 // localisations FR chargées.
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:delivereat/core/l10n/gen/app_localizations.dart';
 import 'package:delivereat/core/theme/app_theme.dart';
 import 'package:delivereat/widgets/empty_state.dart';
 
 void main() {
+  // google_fonts tente de télécharger les polices à l'exécution : en test,
+  // on désactive cet appel réseau et on retombe sur les polices système.
+  setUpAll(() {
+    GoogleFonts.config.allowRuntimeFetching = false;
+  });
+
   testWidgets('EmptyState affiche le titre fourni', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -21,6 +28,7 @@ void main() {
         ),
       ),
     );
+    await tester.pumpAndSettle();
 
     expect(find.text('Aucun résultat'), findsOneWidget);
     expect(find.text('Essayez autre chose'), findsOneWidget);

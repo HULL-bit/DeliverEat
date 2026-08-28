@@ -94,6 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       prefixIcon: const Icon(Icons.lock_outline_rounded),
                       suffixIcon: IconButton(
                         icon: Icon(_obscure ? Icons.visibility_outlined : Icons.visibility_off_outlined),
+                        tooltip: l10n.commonTogglePassword,
                         onPressed: () => setState(() => _obscure = !_obscure),
                       ),
                     ),
@@ -103,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 8),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: TextButton(onPressed: _fillDemoAccount, child: const Text('demo@delivereat.app')),
+                    child: TextButton(onPressed: _fillDemoAccount, child: Text(AppConfig.demoEmail)),
                   ),
                   const SizedBox(height: 16),
                   AppButton(label: l10n.authLoginButton, onPressed: _submit, loading: _submitting),

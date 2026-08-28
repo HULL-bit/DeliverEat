@@ -218,6 +218,24 @@ abstract class AppLocalizations {
   /// **'Une erreur inattendue est survenue.'**
   String get commonUnknownError;
 
+  /// No description provided for @commonBack.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retour'**
+  String get commonBack;
+
+  /// No description provided for @commonScrollToTop.
+  ///
+  /// In fr, this message translates to:
+  /// **'Remonter en haut'**
+  String get commonScrollToTop;
+
+  /// No description provided for @commonTogglePassword.
+  ///
+  /// In fr, this message translates to:
+  /// **'Afficher ou masquer le mot de passe'**
+  String get commonTogglePassword;
+
   /// No description provided for @errorEmailTaken.
   ///
   /// In fr, this message translates to:
@@ -632,6 +650,12 @@ abstract class AppLocalizations {
   /// **'Vider le panier'**
   String get restaurantSwitchConfirm;
 
+  /// No description provided for @restaurantToggleFavorite.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter ou retirer des favoris'**
+  String get restaurantToggleFavorite;
+
   /// No description provided for @cartTitle.
   ///
   /// In fr, this message translates to:
@@ -685,6 +709,18 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Quantité'**
   String get cartQuantity;
+
+  /// No description provided for @cartDecreaseQuantity.
+  ///
+  /// In fr, this message translates to:
+  /// **'Diminuer la quantité'**
+  String get cartDecreaseQuantity;
+
+  /// No description provided for @cartIncreaseQuantity.
+  ///
+  /// In fr, this message translates to:
+  /// **'Augmenter la quantité'**
+  String get cartIncreaseQuantity;
 
   /// No description provided for @checkoutTitle.
   ///

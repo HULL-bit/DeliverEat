@@ -57,7 +57,7 @@ class _RestaurantDetailView extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(),
         body: ErrorRetry(
-          message: detailState.message ?? '',
+          message: ErrorMessages.resolve(context, code: detailState.errorCode, fallback: detailState.message ?? ''),
           onRetry: () => context.read<RestaurantDetailProvider>().reload(),
         ),
       );
@@ -108,17 +108,19 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     final isFavorite = context.select<FavoriteProvider, bool>((p) => p.isFavorite(restaurant.id));
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return SliverAppBar(
       expandedHeight: 240,
       pinned: true,
-      leading: const _CircleIconButton(icon: Icons.arrow_back_rounded),
+      leading: _CircleIconButton(icon: Icons.arrow_back_rounded, tooltip: l10n.commonBack),
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: _CircleIconButton(
             icon: isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
             color: isFavorite ? scheme.error : null,
+            tooltip: l10n.restaurantToggleFavorite,
             onTap: () {
               HapticFeedback.selectionClick();
               context.read<FavoriteProvider>().toggle(restaurant);
@@ -148,11 +150,12 @@ class _Header extends StatelessWidget {
 }
 
 class _CircleIconButton extends StatelessWidget {
-  const _CircleIconButton({required this.icon, this.onTap, this.color});
+  const _CircleIconButton({required this.icon, this.onTap, this.color, this.tooltip});
 
   final IconData icon;
   final VoidCallback? onTap;
   final Color? color;
+  final String? tooltip;
 
   @override
   Widget build(BuildContext context) {
@@ -162,6 +165,7 @@ class _CircleIconButton extends StatelessWidget {
         backgroundColor: Colors.black.withValues(alpha: 0.35),
         child: IconButton(
           icon: Icon(icon, color: color ?? Colors.white, size: 20),
+          tooltip: tooltip,
           onPressed: onTap ?? () => Navigator.of(context).maybePop(),
         ),
       ),

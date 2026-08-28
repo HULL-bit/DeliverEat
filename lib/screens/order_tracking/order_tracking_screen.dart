@@ -112,8 +112,8 @@ class _OrderTrackingViewState extends State<_OrderTrackingView> {
       body: switch (state.status) {
         ViewStatus.loading when state.data == null => const Center(child: CircularProgressIndicator()),
         ViewStatus.error when state.data == null => ErrorRetry(
-            message: state.message ?? '',
-            onRetry: () {},
+            message: ErrorMessages.resolve(context, code: state.errorCode, fallback: state.message ?? ''),
+            onRetry: () => context.read<OrderTrackingProvider>().retry(),
           ),
         _ when state.data != null => _Content(order: state.data!, isLive: isLive, onCancel: _cancel),
         _ => const SizedBox.shrink(),

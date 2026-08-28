@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/l10n/gen/app_localizations.dart';
 import '../../core/routing/app_router.dart';
+import '../../core/utils/error_messages.dart';
 import '../../models/view_state.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/restaurant_provider.dart';
@@ -72,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 CartBadge(
                   child: IconButton(
                     icon: const Icon(Icons.shopping_bag_outlined),
+                    tooltip: l10n.cartTitle,
                     onPressed: () => Navigator.of(context).pushNamed(AppRoutes.cart),
                   ),
                 ),
@@ -105,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
         duration: const Duration(milliseconds: 200),
         scale: _showScrollToTop ? 1 : 0,
         child: FloatingActionButton.small(
+          tooltip: l10n.commonScrollToTop,
           onPressed: () => _scrollController.animateTo(0, duration: const Duration(milliseconds: 400), curve: Curves.easeOutCubic),
           child: const Icon(Icons.arrow_upward_rounded),
         ),
@@ -285,7 +288,10 @@ class _RestaurantListSliver extends StatelessWidget {
     if (state.status == ViewStatus.error && provider.items.isEmpty) {
       return SliverFillRemaining(
         hasScrollBody: false,
-        child: ErrorRetry(message: state.message ?? '', onRetry: () => provider.refresh()),
+        child: ErrorRetry(
+          message: ErrorMessages.resolve(context, code: state.errorCode, fallback: state.message ?? ''),
+          onRetry: () => provider.refresh(),
+        ),
       );
     }
     if (provider.items.isEmpty) {

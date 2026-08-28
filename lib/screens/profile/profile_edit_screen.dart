@@ -146,14 +146,18 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 Positioned(
                   right: 0,
                   bottom: 0,
-                  child: GestureDetector(
-                    onTap: _uploadingAvatar ? null : _showPhotoSheet,
-                    child: CircleAvatar(
-                      radius: 16,
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      child: _uploadingAvatar
-                          ? const SizedBox(width: 14, height: 14, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
-                          : const Icon(Icons.camera_alt_rounded, size: 16, color: Colors.white),
+                  child: Semantics(
+                    button: true,
+                    label: AppLocalizations.of(context).profileChangePhoto,
+                    child: GestureDetector(
+                      onTap: _uploadingAvatar ? null : _showPhotoSheet,
+                      child: CircleAvatar(
+                        radius: 16,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        child: _uploadingAvatar
+                            ? const SizedBox(width: 14, height: 14, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                            : const Icon(Icons.camera_alt_rounded, size: 16, color: Colors.white),
+                      ),
                     ),
                   ),
                 ),

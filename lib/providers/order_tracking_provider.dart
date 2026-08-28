@@ -45,6 +45,13 @@ class OrderTrackingProvider extends ChangeNotifier {
   /// notifier l'utilisateur avec un texte déjà localisé.
   void Function(Order order, OrderStatus previousStatus)? onStatusChanged;
 
+  /// Relance le suivi de la même commande après une erreur (bouton
+  /// "Réessayer"). Sans effet si aucune commande n'a encore été demandée.
+  Future<void> retry() async {
+    final id = _orderId;
+    if (id != null) await track(id);
+  }
+
   Future<void> track(String orderId) async {
     _orderId = orderId;
     _state = const ViewState.loading();
@@ -54,7 +61,7 @@ class OrderTrackingProvider extends ChangeNotifier {
       final order = await _orderService.getOrderDetail(orderId);
       _state = ViewState.success(order);
     } on ApiException catch (e) {
-      _state = ViewState.error(e.message);
+      _state = ViewState.error(e.message, errorCode: e.code);
       notifyListeners();
       return;
     }

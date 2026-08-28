@@ -22,6 +22,9 @@
   "commonRemove": "Retirer",
   "commonSearch": "Rechercher",
   "commonUnknownError": "Une erreur inattendue est survenue.",
+  "commonBack": "Retour",
+  "commonScrollToTop": "Remonter en haut",
+  "commonTogglePassword": "Afficher ou masquer le mot de passe",
 
   "errorEmailTaken": "Cet e-mail est déjà utilisé par un autre compte.",
   "errorInvalidCredentials": "E-mail ou mot de passe incorrect.",
@@ -105,6 +108,7 @@
     "placeholders": { "restaurant": { "type": "String" } }
   },
   "restaurantSwitchConfirm": "Vider le panier",
+  "restaurantToggleFavorite": "Ajouter ou retirer des favoris",
 
   "cartTitle": "Panier",
   "cartEmptyTitle": "Votre panier est vide",
@@ -115,6 +119,8 @@
   "cartViewCart": "Voir le panier",
   "cartCheckoutButton": "Commander",
   "cartQuantity": "Quantité",
+  "cartDecreaseQuantity": "Diminuer la quantité",
+  "cartIncreaseQuantity": "Augmenter la quantité",
 
   "checkoutTitle": "Validation de commande",
   "checkoutAddressLabel": "Adresse de livraison",

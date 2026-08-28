@@ -114,7 +114,10 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                 return const RestaurantListShimmer();
               }
               if (state.status == ViewStatus.error && provider.items.isEmpty) {
-                return ErrorRetry(message: state.message ?? '', onRetry: provider.refresh);
+                return ErrorRetry(
+                  message: ErrorMessages.resolve(context, code: state.errorCode, fallback: state.message ?? ''),
+                  onRetry: provider.refresh,
+                );
               }
               if (provider.items.isEmpty) {
                 return EmptyState(icon: Icons.receipt_long_outlined, title: l10n.ordersEmptyTitle, subtitle: l10n.ordersEmptySubtitle);

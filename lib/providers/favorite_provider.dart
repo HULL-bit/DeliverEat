@@ -43,7 +43,7 @@ class FavoriteProvider extends ChangeNotifier {
       final favorites = await _service.getFavorites();
       _state = ViewState.success(favorites);
     } on ApiException catch (e) {
-      _state = ViewState.error(e.message);
+      _state = ViewState.error(e.message, errorCode: e.code);
     }
     notifyListeners();
   }

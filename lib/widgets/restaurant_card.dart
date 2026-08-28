@@ -142,24 +142,30 @@ class _FavoriteButtonState extends State<_FavoriteButton> with SingleTickerProvi
   Widget build(BuildContext context) {
     final isFavorite = context.select<FavoriteProvider, bool>((p) => p.isFavorite(widget.restaurant.id));
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
 
-    return GestureDetector(
-      onTap: () {
-        HapticFeedback.selectionClick();
-        if (!MediaQuery.of(context).disableAnimations) _controller.forward(from: 0);
-        context.read<FavoriteProvider>().toggle(widget.restaurant);
-      },
-      child: Container(
-        padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.35), shape: BoxShape.circle),
-        child: ScaleTransition(
-          scale: Tween(begin: 1.0, end: 1.4)
-              .chain(CurveTween(curve: Curves.elasticOut))
-              .animate(_controller),
-          child: Icon(
-            isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
-            color: isFavorite ? scheme.error : Colors.white,
-            size: 20,
+    return Semantics(
+      button: true,
+      label: l10n.restaurantToggleFavorite,
+      selected: isFavorite,
+      child: GestureDetector(
+        onTap: () {
+          HapticFeedback.selectionClick();
+          if (!MediaQuery.of(context).disableAnimations) _controller.forward(from: 0);
+          context.read<FavoriteProvider>().toggle(widget.restaurant);
+        },
+        child: Container(
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.35), shape: BoxShape.circle),
+          child: ScaleTransition(
+            scale: Tween(begin: 1.0, end: 1.4)
+                .chain(CurveTween(curve: Curves.elasticOut))
+                .animate(_controller),
+            child: Icon(
+              isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+              color: isFavorite ? scheme.error : Colors.white,
+              size: 20,
+            ),
           ),
         ),
       ),

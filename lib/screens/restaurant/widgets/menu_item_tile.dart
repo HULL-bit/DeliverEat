@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/l10n/gen/app_localizations.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../models/menu_item.dart';
 import '../../../models/restaurant.dart';
@@ -72,6 +73,7 @@ class _QuantityStepper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
     return Container(
       decoration: BoxDecoration(color: scheme.primaryContainer, borderRadius: BorderRadius.circular(12)),
       child: Row(
@@ -79,11 +81,13 @@ class _QuantityStepper extends StatelessWidget {
         children: [
           IconButton(
             icon: const Icon(Icons.remove_rounded, size: 18),
+            tooltip: l10n.cartDecreaseQuantity,
             onPressed: () => context.read<CartProvider>().decrementQuantity(item.id),
           ),
           Text('$quantity', style: Theme.of(context).textTheme.labelLarge),
           IconButton(
             icon: const Icon(Icons.add_rounded, size: 18),
+            tooltip: l10n.cartIncreaseQuantity,
             onPressed: () => context.read<CartProvider>().incrementQuantity(item.id),
           ),
         ],

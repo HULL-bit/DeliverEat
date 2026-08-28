@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../core/l10n/gen/app_localizations.dart';
+import '../../../core/utils/error_messages.dart';
 import '../../../models/view_state.dart';
 import '../../../providers/restaurant_detail_provider.dart';
 import '../../../widgets/error_retry.dart';
@@ -34,7 +35,10 @@ class ReviewList extends StatelessWidget {
         if (state.status == ViewStatus.loading && provider.reviews.isEmpty)
           const ShimmerBox(height: 80)
         else if (state.status == ViewStatus.error && provider.reviews.isEmpty)
-          ErrorRetry(message: state.message ?? '', onRetry: provider.loadReviews)
+          ErrorRetry(
+            message: ErrorMessages.resolve(context, code: state.errorCode, fallback: state.message ?? ''),
+            onRetry: provider.loadReviews,
+          )
         else if (provider.reviews.isEmpty)
           Text(l10n.restaurantNoReviews, style: Theme.of(context).textTheme.bodyMedium)
         else ...[

@@ -61,7 +61,7 @@ class AuthProvider extends ChangeNotifier {
       await _secureStorage.saveTokens(accessToken: result.accessToken, refreshToken: result.refreshToken);
       _state = ViewState.success(result.user);
     } on ApiException catch (e) {
-      _state = ViewState.error(e.message, data: null);
+      _state = ViewState.error(e.message, data: null, errorCode: e.code);
       rethrow;
     } finally {
       notifyListeners();
@@ -76,7 +76,7 @@ class AuthProvider extends ChangeNotifier {
       await _secureStorage.saveTokens(accessToken: result.accessToken, refreshToken: result.refreshToken);
       _state = ViewState.success(result.user);
     } on ApiException catch (e) {
-      _state = ViewState.error(e.message, data: null);
+      _state = ViewState.error(e.message, data: null, errorCode: e.code);
       rethrow;
     } finally {
       notifyListeners();

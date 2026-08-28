@@ -69,6 +69,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commonUnknownError => 'An unexpected error occurred.';
 
   @override
+  String get commonBack => 'Back';
+
+  @override
+  String get commonScrollToTop => 'Scroll to top';
+
+  @override
+  String get commonTogglePassword => 'Show or hide password';
+
+  @override
   String get errorEmailTaken =>
       'This email is already used by another account.';
 
@@ -292,6 +301,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get restaurantSwitchConfirm => 'Clear cart';
 
   @override
+  String get restaurantToggleFavorite => 'Add or remove from favorites';
+
+  @override
   String get cartTitle => 'Cart';
 
   @override
@@ -318,6 +330,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cartQuantity => 'Quantity';
+
+  @override
+  String get cartDecreaseQuantity => 'Decrease quantity';
+
+  @override
+  String get cartIncreaseQuantity => 'Increase quantity';
 
   @override
   String get checkoutTitle => 'Checkout';

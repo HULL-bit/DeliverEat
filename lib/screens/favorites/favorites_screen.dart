@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/l10n/gen/app_localizations.dart';
+import '../../core/utils/error_messages.dart';
 import '../../models/view_state.dart';
 import '../../providers/favorite_provider.dart';
 import '../../widgets/empty_state.dart';
@@ -29,7 +30,12 @@ class FavoritesScreen extends StatelessWidget {
             return const RestaurantListShimmer();
           }
           if (state.status == ViewStatus.error && (state.data == null || state.data!.isEmpty)) {
-            return ListView(children: [ErrorRetry(message: state.message ?? '', onRetry: provider.load)]);
+            return ListView(children: [
+              ErrorRetry(
+                message: ErrorMessages.resolve(context, code: state.errorCode, fallback: state.message ?? ''),
+                onRetry: provider.load,
+              ),
+            ]);
           }
           final favorites = state.data ?? const [];
           if (favorites.isEmpty) {

@@ -64,7 +64,7 @@ class OrderProvider extends ChangeNotifier {
       _hasNext = result.meta.hasNextPage;
       _state = ViewState.success(_items);
     } on ApiException catch (e) {
-      _state = ViewState.error(e.message);
+      _state = ViewState.error(e.message, errorCode: e.code);
     }
     notifyListeners();
   }
