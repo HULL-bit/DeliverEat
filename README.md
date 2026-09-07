@@ -37,6 +37,14 @@ core/network/ (DioClient + AuthInterceptor) · models/ (fromJson typés)
   de l'URL expire comme n'importe quel access token), et gestion du code de
   fermeture `4001`. `OrderTrackingProvider` bascule automatiquement sur un
   polling REST (`GET /orders/:id`) tant que le WebSocket est indisponible.
+- **`core/network/retry_interceptor.dart`** — petit backoff automatique sur
+  429 `RATE_LIMITED` (respecte l'en-tête `Retry-After` si présent) et sur les
+  erreurs réseau transitoires pour les requêtes idempotentes (GET), bornée à
+  2 tentatives pour ne jamais spammer l'API.
+- **`core/utils/error_messages.dart`** — mapping unique code → message
+  FR/EN. Les providers ne dépendent jamais de `BuildContext` : ils stockent
+  le `code` d'erreur dans `ViewState.errorCode`, et c'est l'UI qui le résout
+  au moment de l'affichage via `ErrorMessages.resolve`.
 
 ## Packages utilisés (et pourquoi)
 
@@ -84,6 +92,15 @@ supplémentaire, pas de générateur de code lourd).
   libres de droits déjà présentes dans le dépôt), recadrées et compressées
   dans `assets/images/onboarding/`. Toutes les données de restaurants/plats
   restent 100 % API.
+- **Accessibilité** : `Semantics`/`tooltip` sur les boutons icône-seule
+  (favori, retour, quantité panier, changer photo...) ; les animations
+  respectent `MediaQuery.disableAnimations`.
+
+## Rapport & captures
+
+`Rapport_DeliverEat_Souleymane_DIAW.docx` (racine du dépôt) détaille
+l'architecture, les packages et le parcours complet illustré par les
+captures d'écran réelles du dossier `captures/` (exécutable Linux).
 
 ## Prérequis Linux (développement sous Linux)
 
